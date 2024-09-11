@@ -28,7 +28,7 @@ const Schedule = () => {
             })
     }
 
-    const getGroupList = (currentQuery) => {
+    const getGroupList = (currentQuery) => {        
         if (currentQuery !== "") {
             axios.get("https://webictis.sfedu.ru/schedule-api/?query=" + currentQuery)
                 .then(res => {
@@ -96,7 +96,7 @@ const Schedule = () => {
 
                         <button
                             className="groupButton border text"
-                            onClick={(e) => getGroupList(e.target.value)}>
+                            onClick={() => getGroupList(document.getElementById("groupInput").value)}>
                             Клик
                         </button>
                     </div>
@@ -129,12 +129,6 @@ const Schedule = () => {
                         <div className="schedule border sheduleText">
                             {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} />)}
                         </div>
-                    }
-
-                    {!currentGroup ?
-                        <div>  </div>
-                        :
-                        <></>
                     }
                 </div>
             </div>

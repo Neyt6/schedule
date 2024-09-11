@@ -6,7 +6,6 @@ const PageTitle = ({ title }) => {
 
     useEffect(() => {
         document.title = title;
-
     }, [location, title]);
 
     return null;
