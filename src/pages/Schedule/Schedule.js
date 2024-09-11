@@ -15,16 +15,6 @@ const Schedule = () => {
     let [groupList, setGroupList] = useState();
     let [currentGroup, setCurrentGroup] = useState(localStorage.getItem('group') || false);
 
-    const getCurrentGroupSchedule = async () => {
-        axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup)
-            .then(res => {
-                setScheduleTable(res.data.table.table)
-                setScheduleWeeks(res.data.weeks)
-                setCurrentWeek(res.data.table.week)
-                setCurrentGroupName(res.data.table.name)
-            })
-    }
-
     const getDataByWeek = (week) => {
         axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup + "&week=" + week)
             .then(res => {
@@ -80,7 +70,13 @@ const Schedule = () => {
 
     useEffect(() => {
         if (currentGroup) {
-            getCurrentGroupSchedule()
+            axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup)
+                .then(res => {
+                    setScheduleTable(res.data.table.table)
+                    setScheduleWeeks(res.data.weeks)
+                    setCurrentWeek(res.data.table.week)
+                    setCurrentGroupName(res.data.table.name)
+                })
         }
     }, [currentGroup])
 
