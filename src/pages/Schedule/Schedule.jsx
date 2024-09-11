@@ -4,14 +4,13 @@ import React, { useEffect, useState, } from "react";
 import "./Schedule.css"
 import ScheduleRow from "./ScheduleRow";
 import PageTitle from "../../components/PageTitle";
-import icon from "../../image/img123.svg"
 
 const Schedule = () => {
 
-    let [scheduleTable, setScheduleTable] = useState()
+    let [scheduleTable, setScheduleTable] = useState([])
 
-    let [scheduleWeeks, setScheduleWeeks] = useState()
-    let [currentWeek, setCurrentWeek] = useState("1");
+    let [scheduleWeeks, setScheduleWeeks] = useState([])
+    let [currentWeek, setCurrentWeek] = useState();
     let [currentGroupName, setCurrentGroupName] = useState();
 
     let [groupList, setGroupList] = useState();
@@ -23,12 +22,12 @@ const Schedule = () => {
                 setScheduleTable(res.data.table.table)
             })
             .catch(error => {
-                setScheduleTable()
+                setScheduleTable([])
                 console.log(error)
             })
     }
 
-    const getGroupList = (currentQuery) => {        
+    const getGroupList = (currentQuery) => {
         if (currentQuery !== "") {
             axios.get("https://webictis.sfedu.ru/schedule-api/?query=" + currentQuery)
                 .then(res => {
@@ -45,8 +44,11 @@ const Schedule = () => {
         }
     }
 
-    const addClassToWeek = (week) => {
+    const addClassToWeek = async (week) => {
         let weeksEl = document.getElementsByClassName("week")
+
+        console.log(weeksEl);
+
 
         weeksEl[Number(currentWeek) - 1].classList.add("currentWeek")
 
@@ -72,6 +74,8 @@ const Schedule = () => {
         }
     }
 
+
+
     useEffect(() => {
         if (currentGroup) {
             axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup)
@@ -80,14 +84,17 @@ const Schedule = () => {
                     setScheduleWeeks(res.data.weeks)
                     setCurrentWeek(res.data.table.week)
                     setCurrentGroupName(res.data.table.name)
+
+                    //addClassToWeek(res.data.table.week)
+
                 })
         }
+
     }, [currentGroup])
 
     return (
         <>
-            <PageTitle title="Расписание" />
-            <link rel="icon" href={icon} />
+            <PageTitle title="Расписание ИКТИБ" />
 
             <div className="content text">
                 <div className="scheduleContent">
@@ -111,17 +118,17 @@ const Schedule = () => {
                         </div>
                     }
 
-                    {!scheduleWeeks ? <> </> :
-                        <div className="weeks border"  >
+                    {!scheduleWeeks.length > 0 ? <> </> :
+                        <div className="weeks border">
                             {scheduleWeeks.map((week, ind) =>
-                                <div key={ind} className="week" onClick={() => { getDataByWeek(week); addClassToWeek(week) }} >
+                                <div key={ind} className={"week" + (week === currentWeek ? " currentWeek weekActive" : "")} onClick={() => { getDataByWeek(week); addClassToWeek(week) }} >
                                     {week}
                                 </div>
                             )}
                         </div>
                     }
 
-                    {!scheduleTable ?
+                    {!scheduleTable.length > 0 ?
                         <>
                             {currentGroup ? "Loading..." : "Выберите группу"}
                         </>

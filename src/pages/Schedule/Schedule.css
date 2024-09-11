@@ -56,17 +56,17 @@
 
 .week:hover {
     cursor: pointer;
-    background-color: #1E1E1E;
+    background-color: #555555;
     border-radius: 5px;
 }
 
 .weekActive {
-    background-color: #1E1E1E;
+    background-color: #4c4c4c;
     border-radius: 5px;
 }
 
 .currentWeek {
-    color: #425BC5;
+    color: #58c22a;
 }
 
 .row {
@@ -76,6 +76,13 @@
     margin-left: 5px;
 
     border-bottom: 2px dashed;
+}
+
+.rowGlow {
+    margin-top: 3px;
+
+    box-shadow: #5a42c5 0 0px 2px 3px;
+
 }
 
 .row:last-child {
@@ -104,9 +111,6 @@
     width: 7%;
 }
 
-.currentCell {
-    background-color: #1E1E1E;
-}
 
 .groupBlock {
     margin-bottom: 10px;
@@ -131,7 +135,7 @@
 
 .group:hover {
     cursor: pointer;
-    background-color: #1E1E1E;
+    background-color: #4b4b4b;
     border-radius: 5px;
 }
 
@@ -141,20 +145,4 @@
 
 .groupName {
     margin-bottom: 5px;
-}
-
-.VPKBlock {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 17px;
-}
-
-.VPK {
-    font-size: 17px;
-}
-
-.VPK:hover {
-    cursor: pointer;
-    background-color: #1E1E1E;
-    border-radius: 5px;
 }
