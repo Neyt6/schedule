@@ -123,7 +123,6 @@ const Schedule = () => {
                     :
                     <></>
                 }
-
             </div>
         </div>
     )
