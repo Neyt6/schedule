@@ -1,0 +1,160 @@
+.scheduleContent {
+    width: 90%;
+}
+
+#groupInput {
+    box-shadow: 3px 3px #000000;
+    background-color: gray;
+
+    height: 32px;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+
+#groupInput::placeholder {
+    color: rgb(203, 203, 203);
+}
+
+.inputBlock {
+    display: flex;
+}
+
+.groupButton {
+    box-shadow: 3px 3px #000000;
+    background-color: gray;
+
+    height: 35px;
+
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.groupButton:hover {
+    box-shadow: none;
+    background-color: #4b4b4b;
+}
+
+.schedule {
+    box-shadow: 3px 3px #000000;
+    background-color: gray;
+
+    margin-bottom: 10px;
+}
+
+.weeks {
+    display: flex;
+    margin-bottom: 10px;
+
+    background-color: gray;
+    box-shadow: 3px 3px #000000;
+}
+
+.week {
+    margin: 5px;
+}
+
+.week:hover {
+    cursor: pointer;
+    background-color: #1E1E1E;
+    border-radius: 5px;
+}
+
+.weekActive {
+    background-color: #1E1E1E;
+    border-radius: 5px;
+}
+
+.currentWeek {
+    color: #425BC5;
+}
+
+.row {
+    display: flex;
+
+    margin-right: 5px;
+    margin-left: 5px;
+
+    border-bottom: 2px dashed;
+}
+
+.row:last-child {
+    border: none;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+
+    width: 20%;
+    margin: 5px;
+
+    border-right: 2px dashed;
+
+    hyphens: auto;
+    overflow-wrap: break-word;
+
+}
+
+.cell:last-child {
+    border: none;
+}
+
+.cell:first-child {
+    width: 10%;
+}
+
+.currentCell {
+    background-color: #1E1E1E;
+}
+
+.groupBlock {
+    margin-bottom: 10px;
+    margin-left: 5px;
+
+    max-height: 200px;
+    overflow-y: scroll;
+
+    border-radius: 5px;
+}
+
+.groupBlock::-webkit-scrollbar {
+    width: 12px;
+    color: aliceblue;
+    border-radius: 5px;
+}
+
+.groupBlock::-webkit-scrollbar-thumb {
+    background-color: #1e1e1e;
+    border-radius: 5px;
+}
+
+.group:hover {
+    cursor: pointer;
+    background-color: #1E1E1E;
+    border-radius: 5px;
+}
+
+.group:active {
+    color: #425BC5;
+}
+
+.groupName {
+    margin-bottom: 5px;
+}
+
+.VPKBlock {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 17px;
+}
+
+.VPK {
+    font-size: 17px;
+}
+
+.VPK:hover {
+    cursor: pointer;
+    background-color: #1E1E1E;
+    border-radius: 5px;
+}
