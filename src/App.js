@@ -10,6 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/schedule" element={<Schedule />} />
+        <Route path="/" element={<Schedule />} />
       </Routes>
     </Router>
   );
