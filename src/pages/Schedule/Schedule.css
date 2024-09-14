@@ -150,6 +150,9 @@
 
 .actruLink {
     color: #58c22a;
-    text-decoration: none;
+    text-decoration:none;
+}
 
+.actruLink:hover{
+    text-decoration:underline;
 }

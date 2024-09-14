@@ -7,6 +7,7 @@ import PageTitle from "../../components/PageTitle";
 
 const Schedule = () => {
 
+    let [notification, setNotification] = useState("Loading...")
     let [scheduleTable, setScheduleTable] = useState([])
 
     let [scheduleWeeks, setScheduleWeeks] = useState([])
@@ -23,6 +24,7 @@ const Schedule = () => {
             })
             .catch(error => {
                 setScheduleTable([])
+                setNotification("Расписания для этой недели пока нет")
                 console.log(error)
             })
     }
@@ -47,9 +49,6 @@ const Schedule = () => {
     const addClassToWeek = async (week) => {
         let weeksEl = document.getElementsByClassName("week")
 
-        console.log(weeksEl);
-
-
         weeksEl[Number(currentWeek) - 1].classList.add("currentWeek")
 
         for (let i = 0; i < weeksEl.length; i++) {
@@ -73,8 +72,6 @@ const Schedule = () => {
             getGroupList(e.target.value)
         }
     }
-
-
 
     useEffect(() => {
         if (currentGroup) {
@@ -115,7 +112,7 @@ const Schedule = () => {
                         </div>
                     }
 
-                    {!scheduleWeeks.length > 0 ? <> </> :
+                    {scheduleWeeks.length === 0 ? <> </> :
                         <div className="weeks border">
                             {scheduleWeeks.map((week, ind) =>
                                 <div key={ind} className={"week" + (week === currentWeek ? " currentWeek weekActive" : "")} onClick={() => { getDataByWeek(week); addClassToWeek(week) }} >
@@ -125,9 +122,9 @@ const Schedule = () => {
                         </div>
                     }
 
-                    {!scheduleTable.length > 0 ?
+                    {scheduleTable.length === 0 ?
                         <>
-                            {currentGroup ? "Loading..." : "Выберите группу"}
+                            {currentGroup ? notification : "Выберите группу"}
                         </>
                         :
                         <div className="schedule border sheduleText">
