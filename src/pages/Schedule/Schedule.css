@@ -82,10 +82,12 @@
     margin-top: 3px;
 
     box-shadow: #5a42c5 0 0px 2px 3px;
+    border-radius: 5px;
 }
 
 .row:last-child {
     border: none;
+    margin-bottom: 4px;
 }
 
 .cell {
@@ -144,4 +146,10 @@
 
 .groupName {
     margin-bottom: 5px;
+}
+
+.actruLink {
+    color: #58c22a;
+    text-decoration: none;
+
 }

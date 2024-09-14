@@ -84,9 +84,6 @@ const Schedule = () => {
                     setScheduleWeeks(res.data.weeks)
                     setCurrentWeek(res.data.table.week)
                     setCurrentGroupName(res.data.table.name)
-
-                    //addClassToWeek(res.data.table.week)
-
                 })
         }
 
