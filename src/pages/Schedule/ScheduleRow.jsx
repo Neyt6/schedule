@@ -32,6 +32,7 @@ const itsToday = (dateString) => {
 const addAktru = (cell) => {
     if (cell.includes("АКТРУ")) {
         cell = cell.replace(new RegExp("АКТРУ", 'gi'), "")
+
         return <div>{cell}<Link className="actruLink" href='https://aktru.sfedu.ru/timetable/'>АКТРУ</Link></div>
     }
 

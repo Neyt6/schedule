@@ -8,6 +8,7 @@ import PageTitle from "../../components/PageTitle";
 const Schedule = () => {
 
     let [currentWeek, setCurrentWeek] = useState();
+
     let [notification, setNotification] = useState("Loading...")
     let [scheduleTable, setScheduleTable] = useState([])
 
@@ -137,6 +138,7 @@ const Schedule = () => {
         setScheduleTable(tempScheduleTable)
     }
 
+
     useEffect(() => {
         getVPKList()
 
@@ -160,6 +162,7 @@ const Schedule = () => {
                     else {
                         setScheduleTable(tempGroupTable)
                     }
+
                 })
         }
 
