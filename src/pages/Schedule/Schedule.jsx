@@ -135,11 +135,27 @@ const Schedule = () => {
             }
         });
 
-        setScheduleTable(tempScheduleTable)
+        return tempScheduleTable
     }
 
 
     useEffect(() => {
+
+        const addVPKToTable = (tempGroupTable, tempVPKTable) => {
+            let tempScheduleTable = []
+
+            tempGroupTable.forEach((element, ind) => {
+                if (itsNoEmpty(tempVPKTable[ind])) {
+                    tempScheduleTable.push(tempVPKTable[ind])
+                }
+                else {
+                    tempScheduleTable.push(element)
+                }
+            });
+
+            setScheduleTable(tempScheduleTable)
+        }
+
         getVPKList()
 
         if (currentGroup) {
