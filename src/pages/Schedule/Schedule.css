@@ -157,3 +157,20 @@
 .actruLink:hover {
     text-decoration: underline;
 }
+
+.vpks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+
+    background-color: gray;
+    box-shadow: 3px 3px #000000;
+}
+
+.vpk::after {
+    content: ",";
+  
+.actruLink:hover {
+    text-decoration: underline;
+  }
