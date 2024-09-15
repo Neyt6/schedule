@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import "./HideBlock.css"
 
-const HideBlock = ({ children, title, hide = true }) => {
+const HideBlock = ({ children, title, hide = false }) => {
 
     const childRef = useRef(null);
     const titleRef = useRef(null);

@@ -49,9 +49,9 @@ const ScheduleRow = ({ row }) => {
     return (
         <div className={"row" + rowClass}>
             {row.map((cell, ind) =>
-                <code key={ind} className="cell">
+                <div key={ind} className="cell">
                     {addAktru(cell)}
-                </code>
+                </div>
             )}
         </div>
     )

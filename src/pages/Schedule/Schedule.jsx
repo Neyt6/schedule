@@ -232,7 +232,7 @@ const Schedule = () => {
                     }
 
                     {VPKList.length === 0 ? <> </> :
-                        <HideBlock title={"ВПК"}>
+                        <HideBlock title={"ВПК"} hide={true}>
                             <div className="vpks border">
                                 {VPKList.map((vpk, ind) =>
                                     <div key={ind} className={"week vpk" + (vpk.group === currentVPK ? " currentWeek" : "")} onClick={() => showVPKSchedule(vpk.group)} >

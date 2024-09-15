@@ -1,5 +1,5 @@
 .scheduleContent {
-    width: 90vw;
+    width: 85vw;
 }
 
 #groupInput {
@@ -13,7 +13,7 @@
 }
 
 #groupInput::placeholder {
-    color: rgb(203, 203, 203);
+    color: rgb(200, 200, 200);
 }
 
 .inputBlock {
@@ -98,14 +98,10 @@
     display: flex;
     align-items: center;
 
-    width: 15vw;
+    width: 15%;
     margin: 5px;
 
     border-right: 2px dashed;
-
-    hyphens: auto;
-    overflow-wrap: break-word;
-
 }
 
 .cell:last-child {
@@ -113,7 +109,7 @@
 }
 
 .cell:first-child {
-    width: 7vw;
+    width: 6%;
 }
 
 .groupBlock {
