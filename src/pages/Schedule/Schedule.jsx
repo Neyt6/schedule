@@ -7,36 +7,42 @@ import PageTitle from "../../components/PageTitle";
 
 const Schedule = () => {
 
-    const [table, setTable] = useState([])
+    let [currentWeek, setCurrentWeek] = useState();
+    let [notification, setNotification] = useState("Loading...")
+    let [scheduleTable, setScheduleTable] = useState([])
 
-    const [scheduleTable, setScheduleTable] = useState([])
-    const [scheduleWeeks, setScheduleWeeks] = useState([])
+    let [scheduleWeeks, setScheduleWeeks] = useState([])
+    let [currentGroupName, setCurrentGroupName] = useState();
+    let [currentGroup, setCurrentGroup] = useState(localStorage.getItem('group') || false);
 
-    const [currentWeek, setCurrentWeek] = useState();
+    let [VPKList, setVPKList] = useState([])
+    let [currentVPK, setCurrentVPK] = useState(localStorage.getItem('VPK') || false);
+    let [currentVPKName, setCurrentVPKName] = useState();
 
-    const [groupList, setGroupList] = useState([]);
-    const [currentGroup, setCurrentGroup] = useState(localStorage.getItem('group') || false);
-    const [currentGroupName, setCurrentGroupName] = useState("");
-
-    const [scheduleVPKTable, setScheduleVPKTable] = useState([])
-    const [VPKList, setVPKList] = useState([]);
-    const [currentVPK, setCurrentVPK] = useState(localStorage.getItem('VPK') || false);
-    const [currentVPKName, setCurrentVPKName] = useState("");
-
+    let [groupList, setGroupList] = useState();
 
     const getDataByWeek = (week) => {
+        let tempGroupTable = []
+
         axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup + "&week=" + week)
             .then(res => {
-                setScheduleTable(res.data.table.table)
+                tempGroupTable = res.data.table.table
+                if (currentVPK) {
+                    axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentVPK + "&week=" + week)
+                        .then(res => {
+                            addVPKToTable(tempGroupTable, res.data.table.table)
+                        })
+                }
+                else {
+                    setScheduleTable(tempGroupTable)
+                }
+
             })
             .catch(error => {
                 setScheduleTable([])
+                setNotification("Расписания для этой недели пока нет")
                 console.log(error)
             })
-
-        getVPKDataByWeek(week)
-        setTable(addVPK(scheduleTable, scheduleVPKTable))
-
     }
 
     const getGroupList = (currentQuery) => {
@@ -47,7 +53,7 @@ const Schedule = () => {
                         setGroupList([{ name: "Нет результатов" }])
                     }
                     else if (!res.data.choices) {
-                        choiceGroup(res.data.table.group)
+                        showGroupSchedule(res.data.table.group)
                     }
                     else {
                         setGroupList(res.data.choices)
@@ -57,49 +63,17 @@ const Schedule = () => {
     }
 
     const getVPKList = () => {
-        axios.get("https://webictis.sfedu.ru/schedule-api/?query=ВПК")
+        axios.get("https://webictis.sfedu.ru/schedule-api/?query=впк")
             .then(res => {
-                setVPKList(res.data.choices)
+                let vpk = res.data.choices
+                vpk.sort((a, b) => {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                });
+
+                setVPKList(vpk)
             })
-    }
-
-    const getVPKDataByWeek = (week) => {
-        axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentVPK + "&week=" + week)
-            .then(res => {
-                setScheduleVPKTable(res.data.table.table)
-                console.log(res.data.table.table)
-            })
-            .catch(error => {
-                setScheduleVPKTable([])
-                console.log(error)
-            })
-    }
-
-    const choiceVPK = (VPK) => {
-        localStorage.setItem('VPK', VPK.group);
-        setCurrentVPK(VPK.group)
-
-        setCurrentVPKName(VPK.name)
-    }
-
-    const itsVPK = (arr) => {
-        for (let i = 2; i <= 7; i++) {
-            console.log(arr[i]);
-
-            if (arr[i] !== '') {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    const addVPK = (arr1, arr2) => {
-        console.log(arr1, arr2);
-
-        return arr1.map((item, index) => {
-            return itsVPK(arr2[index]) ? arr2[index] : item;
-        });
     }
 
     const addClassToWeek = async (week) => {
@@ -113,13 +87,23 @@ const Schedule = () => {
         weeksEl[Number(week) - 1].classList.add("weekActive")
     }
 
-    const choiceGroup = (group) => {
+    const showGroupSchedule = (group) => {
         if (group) {
-            localStorage.setItem('group', group);
+            localStorage.setItem("group", group)
             setCurrentGroup(group);
-            setGroupList([])
+            setGroupList()
             document.getElementById("groupInput").value = ""
             addClassToWeek(currentWeek)
+        }
+    }
+
+    const showVPKSchedule = (vpk) => {
+        if (vpk) {
+            console.log(vpk);
+
+            localStorage.setItem("VPK", vpk)
+            setCurrentVPK(vpk);
+            // addClassToWeek(currentWeek)
         }
     }
 
@@ -129,26 +113,54 @@ const Schedule = () => {
         }
     }
 
+    const itsNoEmpty = (list) => {
+        for (let i = 1; i < list.length; i++) {
+            if (list[i] !== "") {
+                return true
+            }
+        }
+        return false
+    }
+
+    const addVPKToTable = (tempGroupTable, tempVPKTable) => {
+        let tempScheduleTable = []
+
+        tempGroupTable.forEach((element, ind) => {
+            if (itsNoEmpty(tempVPKTable[ind])) {
+                tempScheduleTable.push(tempVPKTable[ind])
+            }
+            else {
+                tempScheduleTable.push(element)
+            }
+        });
+
+        setScheduleTable(tempScheduleTable)
+    }
+
     useEffect(() => {
+        getVPKList()
+
         if (currentGroup) {
             axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup)
                 .then(res => {
-                    setScheduleTable(res.data.table.table)
+                    let tempGroupTable = res.data.table.table
                     setScheduleWeeks(res.data.weeks)
                     setCurrentWeek(res.data.table.week)
                     setCurrentGroupName(res.data.table.name)
-                })
-        }
-        setTable(scheduleTable)
-        getVPKList()
 
-        if (currentVPK) {
-            axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentVPK)
-                .then(res => {
-                    setScheduleVPKTable(res.data.table.table)
-                    setCurrentVPKName(res.data.table.name)
+                    if (currentVPK) {
+                        axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentVPK)
+                            .then(res => {
+                                let tempVPKTable = res.data.table.table
+                                setCurrentVPKName(res.data.table.name)
+
+                                addVPKToTable(tempGroupTable, tempVPKTable)
+                            })
+                    }
+                    else {
+                        setScheduleTable(tempGroupTable)
+                    }
                 })
-            setTable(addVPK(scheduleTable, scheduleVPKTable))
         }
 
     }, [currentGroup, currentVPK])
@@ -160,7 +172,7 @@ const Schedule = () => {
             <div className="content text">
                 <div className="scheduleContent">
                     <div className="inputBlock">
-                        <input id="groupInput" className="border text" placeholder={currentGroupName + currentVPKName} onKeyDown={onKeyDown} />
+                        <input id="groupInput" className="border text" placeholder={currentGroupName + (currentVPKName ? " + " + currentVPKName : "")} onKeyDown={onKeyDown} />
 
                         <button
                             className="groupButton border text"
@@ -169,17 +181,17 @@ const Schedule = () => {
                         </button>
                     </div>
 
-                    {!groupList.length > 0 ? <> </> :
+                    {!groupList ? <> </> :
                         <div className="groupBlock">
                             {groupList.map((group, ind) =>
-                                <div key={ind} className="group" onClick={() => choiceGroup(group.group)} >
+                                <div key={ind} className="group" onClick={() => showGroupSchedule(group.group)} >
                                     {group.name}
                                 </div>
                             )}
                         </div>
                     }
 
-                    {!scheduleWeeks.length > 0 ? <> </> :
+                    {scheduleWeeks.length === 0 ? <> </> :
                         <div className="weeks border">
                             {scheduleWeeks.map((week, ind) =>
                                 <div key={ind} className={"week" + (week === currentWeek ? " currentWeek weekActive" : "")} onClick={() => { getDataByWeek(week); addClassToWeek(week) }} >
@@ -189,26 +201,26 @@ const Schedule = () => {
                         </div>
                     }
 
-                    {!table.length > 0 ?
+                    {scheduleTable.length === 0 ?
                         <>
-                            {currentGroup ? "Loading..." : "Выберите группу"}
+                            {currentGroup ? notification : "Выберите группу"}
                         </>
                         :
                         <div className="schedule border sheduleText">
-                            {table.map((row, ind) => <ScheduleRow key={ind} row={row} />)}
+                            {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} />)}
                         </div>
                     }
 
-                    {!VPKList.length > 0 ? <> </> :
-                        <div className="weeks border">
-                            {VPKList.map((VPK, ind) =>
-                                <div key={ind} className={"week" + (VPK === currentWeek ? " currentWeek weekActive" : "")} onClick={() => { choiceVPK(VPK) }} >
-                                    {VPK.name.replace("ВПК ", "")}
+                    {VPKList.length === 0 ? <> </> :
+                        <div className="vpks border">
+                            {VPKList.map((vpk, ind) =>
+                                <div key={ind} className={"week vpk" + (vpk.group === currentVPK ? " currentWeek" : "")} onClick={() => showVPKSchedule(vpk.group)} >
+                                    {vpk.name.replace("ВПК", "")}
                                 </div>
                             )}
+                            <div className="week" onClick={() => { setCurrentVPK(false); localStorage.removeItem("VPK"); setCurrentVPKName("") }}>Убрать ВПК</div>
                         </div>
                     }
-
                 </div>
             </div>
         </>

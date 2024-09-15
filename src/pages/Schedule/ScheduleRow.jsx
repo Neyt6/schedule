@@ -1,8 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const ScheduleRow = ({ row }) => {
-
-    var dateString = row[0].substring(4)
+const itsToday = (dateString) => {
 
     const months = {
         "января": 0,
@@ -24,9 +23,25 @@ const ScheduleRow = ({ row }) => {
     const month = months[monthName];
     const currentDate = new Date();
 
+    if (Number(day) === currentDate.getDate() && month === currentDate.getMonth()) {
+        return true
+    }
+    return false
+}
+
+const addAktru = (cell) => {
+    if (cell.includes("АКТРУ")) {
+        cell = cell.replace(new RegExp("АКТРУ", 'gi'), "")
+        return <div>{cell}<Link className="actruLink" href='https://aktru.sfedu.ru/timetable/'>АКТРУ</Link></div>
+    }
+
+    return cell
+}
+
+const ScheduleRow = ({ row }) => {
+
     var rowClass = ""
-    if (Number(day) === currentDate.getDate() && month === currentDate.getMonth()){
-        console.log(true);
+    if (itsToday(row[0].substring(4))) {
         rowClass = " rowGlow"
     }
 
@@ -34,7 +49,7 @@ const ScheduleRow = ({ row }) => {
         <div className={"row" + rowClass}>
             {row.map((cell, ind) =>
                 <code key={ind} className="cell">
-                    {cell}
+                    {addAktru(cell)}
                 </code>
             )}
         </div>

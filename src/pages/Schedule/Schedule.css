@@ -7,7 +7,8 @@
     background-color: gray;
 
     height: 32px;
-    width: 90%;
+    width: 100%;
+
     margin-bottom: 10px;
 }
 
@@ -24,15 +25,20 @@
     background-color: gray;
 
     height: 35px;
-    width: 9%;
 
     margin-left: 5px;
     margin-bottom: 10px;
 }
 
 .groupButton:hover {
+    cursor: pointer;
     box-shadow: none;
-    background-color: #4b4b4b;
+    background-color: #999797;
+}
+
+.groupButton:active {
+    box-shadow: none;
+    border: none;
 }
 
 .schedule {
@@ -66,7 +72,7 @@
 }
 
 .currentWeek {
-    color: #58c22a;
+    color: #58e870;
 }
 
 .row {
@@ -81,11 +87,13 @@
 .rowGlow {
     margin-top: 3px;
 
-    box-shadow: #5a42c5 0 0px 2px 3px;
+    box-shadow: #21059e 0px 0px 2px 2px;
+    border-radius: 5px;
 }
 
 .row:last-child {
     border: none;
+    margin-bottom: 4px;
 }
 
 .cell {
@@ -109,7 +117,6 @@
 .cell:first-child {
     width: 7vw;
 }
-
 
 .groupBlock {
     margin-bottom: 10px;
@@ -139,9 +146,28 @@
 }
 
 .group:active {
-    color: #425BC5;
+    color: #5742b5;
 }
 
-.groupName {
-    margin-bottom: 5px;
+.actruLink {
+    color: #58e870;
+    text-decoration: none;
+}
+
+.actruLink:hover {
+    text-decoration: underline;
+}
+
+.vpks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+
+    background-color: gray;
+    box-shadow: 3px 3px #000000;
+}
+
+.vpk::after {
+    content: ",";
 }
