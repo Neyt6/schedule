@@ -4,6 +4,7 @@ import React, { useEffect, useState, } from "react";
 import "./Schedule.css"
 import ScheduleRow from "./ScheduleRow";
 import PageTitle from "../../components/PageTitle";
+import HideBlock from "../../components/HideBlock";
 
 const Schedule = () => {
 
@@ -231,14 +232,16 @@ const Schedule = () => {
                     }
 
                     {VPKList.length === 0 ? <> </> :
-                        <div className="vpks border">
-                            {VPKList.map((vpk, ind) =>
-                                <div key={ind} className={"week vpk" + (vpk.group === currentVPK ? " currentWeek" : "")} onClick={() => showVPKSchedule(vpk.group)} >
-                                    {vpk.name.replace("ВПК", "")}
-                                </div>
-                            )}
-                            <div className="week" onClick={() => { setCurrentVPK(false); localStorage.removeItem("VPK"); setCurrentVPKName("") }}>Убрать ВПК</div>
-                        </div>
+                        <HideBlock title={"ВПК"}>
+                            <div className="vpks border">
+                                {VPKList.map((vpk, ind) =>
+                                    <div key={ind} className={"week vpk" + (vpk.group === currentVPK ? " currentWeek" : "")} onClick={() => showVPKSchedule(vpk.group)} >
+                                        {vpk.name.replace("ВПК", "")}
+                                    </div>
+                                )}
+                                <div className="week" onClick={() => { setCurrentVPK(false); localStorage.removeItem("VPK"); setCurrentVPKName("") }}>Убрать ВПК</div>
+                            </div>
+                        </HideBlock>
                     }
                 </div>
             </div>

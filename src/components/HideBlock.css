@@ -1,0 +1,15 @@
+.disableBlock {
+    display: none !important;
+}
+
+.arrowDown::before {
+    content: "▼ ";
+}
+
+.arrowRight::before {
+    content: "▶ ";
+}
+
+.pointer {
+    cursor: pointer;
+}
