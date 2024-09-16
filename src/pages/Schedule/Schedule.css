@@ -25,7 +25,6 @@
     box-shadow: 3px 3px #000000;
     background-color: gray;
 
-    height: 32px;
     width: 100%;
 }
 
@@ -36,13 +35,12 @@
 .inputBlock {
     display: flex;
     margin-bottom: 7px;
+    padding-top: 1px;
 }
 
 .groupButton {
     box-shadow: 3px 3px #000000;
     background-color: gray;
-
-    height: 35px;
 
     margin-left: 5px;
 }
@@ -73,7 +71,7 @@
 }
 
 .week {
-    margin: 5px;
+    margin: 3px 0px 3px 5px;
 }
 
 .week:hover {
