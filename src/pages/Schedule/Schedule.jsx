@@ -32,7 +32,7 @@ const Schedule = () => {
     let [textColor, setTextColor] = useState(localStorage.getItem('textColor') || "#f0f8ff");
     document.documentElement.style.setProperty('--text-color', textColor);
 
-    let [onVPK, setOnVPK] = useState(localStorage.getItem('onVPK') || false);
+    let [onVPK, setOnVPK] = useState((localStorage.getItem('onVPK') === "true") || false);
 
     const getDataByWeek = (week) => {
         let tempGroupTable = []

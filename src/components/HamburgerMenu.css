@@ -20,19 +20,10 @@ margin: 0;
     background-color: var(--background-color);
     padding: 10px;
     border-radius: 5px;
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: all 0.3s ease;
+
 }
 
 .menu div{
     display: flex;
     align-items: center;
-}
-
-.menu.open {
-    opacity: 1;
-    transform: scaleY(1);
-    
 }
