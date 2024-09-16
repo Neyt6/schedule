@@ -4,8 +4,13 @@
     }
 
     .cell {
-        margin: 1px !important;
+        padding: 1px !important;
         word-break: break-all;
+        border-right: 1px dashed !important;
+    }
+
+    .row {
+        border-bottom: 1px dashed !important;
     }
 
     .sheduleText {
@@ -105,9 +110,13 @@
     border-radius: 5px;
 }
 
+.row:first-child {
+    margin-top: 5px;
+}
+
 .row:last-child {
-    border: none;
-    margin-bottom: 4px;
+    border: none !important;
+    margin-bottom: 5px;
 }
 
 .cell {
@@ -115,14 +124,14 @@
     align-items: center;
 
     width: 15%;
-    margin: 5px;
+    padding: 5px;
 
     border-right: 2px dashed;
 
 }
 
 .cell:last-child {
-    border: none;
+    border: none !important;
 }
 
 .cell:first-child {
