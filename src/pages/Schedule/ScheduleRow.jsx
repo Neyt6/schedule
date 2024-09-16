@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const itsToday = (dateString) => {
 
@@ -33,7 +32,7 @@ const addAktru = (cell) => {
     if (cell.includes("АКТРУ")) {
         cell = cell.replace(new RegExp("АКТРУ", 'gi'), "")
 
-        return <div>{cell}<a className="actruLink" href='https://aktru.sfedu.ru/timetable/'>АКТРУ</a></div>
+        return <div>{cell}<a className="actruLink" href='https://aktru.sfedu.ru/timetable/day/'>АКТРУ</a></div>
     }
 
     return cell
