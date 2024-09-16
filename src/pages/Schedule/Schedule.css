@@ -1,3 +1,22 @@
+@media screen and (max-width: 1000px) {
+    .scheduleContent {
+        width: 100% !important;
+    }
+
+    .cell {
+        margin: 1px !important;
+        word-break: break-all;
+    }
+
+    .sheduleText {
+        font-size: 10px !important;
+    }
+
+    .text {
+        font-size: 15px !important;
+    }
+}
+
 .scheduleContent {
     width: 85vw;
 }
@@ -8,8 +27,6 @@
 
     height: 32px;
     width: 100%;
-
-    margin-bottom: 10px;
 }
 
 #groupInput::placeholder {
@@ -18,6 +35,7 @@
 
 .inputBlock {
     display: flex;
+    margin-bottom: 7px;
 }
 
 .groupButton {
@@ -27,7 +45,6 @@
     height: 35px;
 
     margin-left: 5px;
-    margin-bottom: 10px;
 }
 
 .groupButton:hover {
@@ -48,8 +65,9 @@
 
 .weeks {
     display: flex;
-    margin-bottom: 10px;
+    flex-wrap: wrap;
 
+    margin-bottom: 7px;
     background-color: gray;
     box-shadow: 3px 3px #000000;
 }
@@ -102,6 +120,7 @@
     margin: 5px;
 
     border-right: 2px dashed;
+
 }
 
 .cell:last-child {

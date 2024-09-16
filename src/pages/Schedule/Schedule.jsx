@@ -198,8 +198,6 @@ const Schedule = () => {
                             Клик
                         </button>
                     </div>
-                    
-                    <a className="actruLink" href={"https://aktru.sfedu.ru/timetable/day/"} target="_blank" rel="noreferrer" >АКТРУ</a>
 
                     {!groupList ? <> </> :
                         <div className="groupBlock">
