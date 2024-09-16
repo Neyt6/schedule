@@ -33,7 +33,7 @@ const addAktru = (cell) => {
     if (cell.includes("АКТРУ")) {
         cell = cell.replace(new RegExp("АКТРУ", 'gi'), "")
 
-        return <div>{cell}<Link className="actruLink" href='https://aktru.sfedu.ru/timetable/'>АКТРУ</Link></div>
+        return <div>{cell}<a className="actruLink" href='https://aktru.sfedu.ru/timetable/'>АКТРУ</a></div>
     }
 
     return cell
