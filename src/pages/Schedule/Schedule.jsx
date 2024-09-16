@@ -8,20 +8,29 @@ import HideBlock from "../../components/HideBlock";
 
 const Schedule = () => {
 
-    let [currentWeek, setCurrentWeek] = useState();
-
-    let [notification, setNotification] = useState("Loading...")
+    let [currentWeek, setCurrentWeek] = useState(1);
     let [scheduleTable, setScheduleTable] = useState([])
 
     let [scheduleWeeks, setScheduleWeeks] = useState([])
-    let [currentGroupName, setCurrentGroupName] = useState("");
     let [currentGroup, setCurrentGroup] = useState(localStorage.getItem('group') || false);
+    let [currentGroupName, setCurrentGroupName] = useState("");
 
     let [VPKList, setVPKList] = useState([])
     let [currentVPK, setCurrentVPK] = useState(localStorage.getItem('VPK') || false);
     let [currentVPKName, setCurrentVPKName] = useState("");
 
     let [groupList, setGroupList] = useState();
+
+    let [notification, setNotification] = useState("Loading...")
+    
+    let [contrastColor, setContrastColor] = useState(localStorage.getItem('contrastColor') || "#58e870");
+    document.documentElement.style.setProperty('--contrast-color', contrastColor);
+
+    let [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('backgroundColor') || "#808080");
+    document.documentElement.style.setProperty('--background-color', backgroundColor);
+
+    let [textColor, setTextColor] = useState(localStorage.getItem('textColor') || "#f0f8ff");
+    document.documentElement.style.setProperty('--text-color', textColor);
 
     const getDataByWeek = (week) => {
         let tempGroupTable = []
@@ -138,6 +147,21 @@ const Schedule = () => {
         return tempScheduleTable
     }
 
+    const changeContrastColor = (color) => {
+        setContrastColor(color)
+        localStorage.setItem("contrastColor", color)
+    }
+
+    const changeBackgroundColor = (color) => {
+        setBackgroundColor(color)
+        localStorage.setItem("backgroundColor", color)
+    }
+
+    const changeTextColor = (color) => {
+        setTextColor(color)
+        localStorage.setItem("textColor", color)
+    }
+
     useEffect(() => {
 
         const addVPKToTable = (tempGroupTable, tempVPKTable) => {
@@ -242,6 +266,9 @@ const Schedule = () => {
                         </HideBlock>
                     }
                 </div>
+                <input type="color" value={contrastColor} onChange={e => changeContrastColor(e.target.value)}></input>
+                <input type="color" value={backgroundColor} onChange={e => changeBackgroundColor(e.target.value)}></input>
+                <input type="color" value={textColor} onChange={e => changeTextColor(e.target.value)}></input>
             </div>
         </>
     )
