@@ -3,8 +3,8 @@ import React, { useEffect, useState, } from "react";
 
 import "./Schedule.css"
 import ScheduleRow from "./ScheduleRow";
-import PageTitle from "../../components/PageTitle";
 import HideBlock from "../../components/HideBlock";
+import HamburgerMenu from "../../components/HamburgerMenu";
 
 const Schedule = () => {
 
@@ -22,7 +22,7 @@ const Schedule = () => {
     let [groupList, setGroupList] = useState();
 
     let [notification, setNotification] = useState("Loading...")
-    
+
     let [contrastColor, setContrastColor] = useState(localStorage.getItem('contrastColor') || "#58e870");
     document.documentElement.style.setProperty('--contrast-color', contrastColor);
 
@@ -31,6 +31,8 @@ const Schedule = () => {
 
     let [textColor, setTextColor] = useState(localStorage.getItem('textColor') || "#f0f8ff");
     document.documentElement.style.setProperty('--text-color', textColor);
+
+    let [onVPK, setOnVPK] = useState(localStorage.getItem('onVPK') || false);
 
     const getDataByWeek = (week) => {
         let tempGroupTable = []
@@ -162,6 +164,19 @@ const Schedule = () => {
         localStorage.setItem("textColor", color)
     }
 
+    const changeOffVPK = (e) => {
+        setOnVPK(e.target.checked)
+        localStorage.setItem("onVPK", e.target.checked)
+
+        if (!e.target.checked) {
+            setVPKList([])
+            setCurrentVPK("")
+            setCurrentVPKName("")
+            localStorage.removeItem("VPK")
+
+        }
+    }
+
     useEffect(() => {
 
         const addVPKToTable = (tempGroupTable, tempVPKTable) => {
@@ -179,7 +194,9 @@ const Schedule = () => {
             setScheduleTable(tempScheduleTable)
         }
 
-        getVPKList()
+        if (onVPK) {
+            getVPKList()
+        }
 
         if (currentGroup) {
             axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup)
@@ -205,13 +222,36 @@ const Schedule = () => {
                 })
         }
 
-    }, [currentGroup, currentVPK])
+    }, [currentGroup, currentVPK, onVPK])
 
     return (
         <>
-            <PageTitle title="Расписание ИКТИБ" />
-
             <div className="content text">
+                <HamburgerMenu>
+                    Настройки:
+                    <div>
+                        <label htmlFor="contrastColor" className="text">Контрасный цвет </label>
+                        <input type="color" value={contrastColor} id="contrastColor" onChange={e => changeContrastColor(e.target.value)}></input>
+                    </div>
+                    <div>
+                        <label htmlFor="backgroundColor" className="text">Задний фон </label>
+                        <input type="color" value={backgroundColor} id="backgroundColor" onChange={e => changeBackgroundColor(e.target.value)}></input>
+                    </div>
+                    <div>
+                        <label htmlFor="textColor" className="text">Цвет текста </label>
+                        <input type="color" value={textColor} id="textColor" onChange={e => changeTextColor(e.target.value)}></input>
+                    </div>
+                    <div>
+                        <label htmlFor="unloadModelCheckBox" className="">Включить ВПК</label>
+                        <input
+                            type="checkbox"
+                            id="unloadModelCheckBox"
+                            checked={onVPK}
+                            onChange={(e) => changeOffVPK(e)}
+                        />
+                    </div>
+                </HamburgerMenu>
+
                 <div className="scheduleContent">
                     <div className="inputBlock">
                         <input id="groupInput" className="border text" placeholder={currentGroupName + (currentVPKName ? " + " + currentVPKName : "")} onKeyDown={onKeyDown} />
@@ -266,9 +306,7 @@ const Schedule = () => {
                         </HideBlock>
                     }
                 </div>
-                <input type="color" value={contrastColor} onChange={e => changeContrastColor(e.target.value)}></input>
-                <input type="color" value={backgroundColor} onChange={e => changeBackgroundColor(e.target.value)}></input>
-                <input type="color" value={textColor} onChange={e => changeTextColor(e.target.value)}></input>
+
             </div>
         </>
     )

@@ -24,8 +24,8 @@
 
 :root {
     --contrast-color: #58e870;
-    --background-color: gray;
-    --text-color: aliceblue;
+    --background-color: #808080;
+    --text-color: #f0f8ff;
 }
 
 .scheduleContent {
@@ -59,7 +59,7 @@
 .groupButton:hover {
     cursor: pointer;
     box-shadow: none;
-    background-color: #999797;
+    background-color: #999999;
 }
 
 .groupButton:active {
@@ -156,23 +156,23 @@
 
 .groupBlock::-webkit-scrollbar {
     width: 12px;
-    color: aliceblue;
+    color: var(--background-color);;
     border-radius: 5px;
 }
 
 .groupBlock::-webkit-scrollbar-thumb {
-    background-color: #1e1e1e;
+    background-color: var(--background-color);
     border-radius: 5px;
 }
 
 .group:hover {
     cursor: pointer;
-    background-color: #1e1e1e;
+    background-color: var(--background-color);
     border-radius: 5px;
 }
 
 .group:active {
-    color: #5742b5;
+    color: var(--contrast-color);
 }
 
 .actruLink {
@@ -200,4 +200,11 @@
 
 .actruLink:hover {
     text-decoration: underline;
+}
+
+input[type="color"] {
+    border: none;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
 }
