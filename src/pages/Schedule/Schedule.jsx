@@ -14,12 +14,12 @@ const Schedule = () => {
     let [scheduleTable, setScheduleTable] = useState([])
 
     let [scheduleWeeks, setScheduleWeeks] = useState([])
-    let [currentGroupName, setCurrentGroupName] = useState();
+    let [currentGroupName, setCurrentGroupName] = useState("");
     let [currentGroup, setCurrentGroup] = useState(localStorage.getItem('group') || false);
 
     let [VPKList, setVPKList] = useState([])
     let [currentVPK, setCurrentVPK] = useState(localStorage.getItem('VPK') || false);
-    let [currentVPKName, setCurrentVPKName] = useState();
+    let [currentVPKName, setCurrentVPKName] = useState("");
 
     let [groupList, setGroupList] = useState();
 
@@ -105,7 +105,6 @@ const Schedule = () => {
 
             localStorage.setItem("VPK", vpk)
             setCurrentVPK(vpk);
-            // addClassToWeek(currentWeek)
         }
     }
 
@@ -138,7 +137,6 @@ const Schedule = () => {
 
         return tempScheduleTable
     }
-
 
     useEffect(() => {
 
@@ -223,7 +221,7 @@ const Schedule = () => {
 
                     {scheduleTable.length === 0 ?
                         <>
-                            {currentGroup ? notification : "Выберите группу"}
+                            {currentGroup ? notification : "Введите группу, фамилию преподавателя или номер аудитории"}
                         </>
                         :
                         <div className="schedule border sheduleText">
