@@ -230,17 +230,23 @@ const Schedule = () => {
                 <HamburgerMenu>
                     Настройки:
                     <div>
-                        <label htmlFor="contrastColor" className="text">Контрасный цвет </label>
+                        <label htmlFor="contrastColor" className="text">Контрастный цвет </label>
                         <input type="color" value={contrastColor} id="contrastColor" onChange={e => changeContrastColor(e.target.value)}></input>
+                        <button onClick={() => { localStorage.removeItem("contrastColor"); setContrastColor("#58e870") }} className="text resetButton">✖</button>
                     </div>
+                    
                     <div>
                         <label htmlFor="backgroundColor" className="text">Задний фон </label>
                         <input type="color" value={backgroundColor} id="backgroundColor" onChange={e => changeBackgroundColor(e.target.value)}></input>
+                        <button onClick={() => { localStorage.removeItem("backgroundColor"); setBackgroundColor("#808080") }} className="text resetButton">✖</button>
                     </div>
+
                     <div>
                         <label htmlFor="textColor" className="text">Цвет текста </label>
                         <input type="color" value={textColor} id="textColor" onChange={e => changeTextColor(e.target.value)}></input>
+                        <button onClick={() => { localStorage.removeItem("textColor"); setTextColor("#f0f8ff") }} className="text resetButton">✖</button>
                     </div>
+
                     <div>
                         <label htmlFor="unloadModelCheckBox" className="">Включить ВПК</label>
                         <input
@@ -284,9 +290,9 @@ const Schedule = () => {
                     }
 
                     {scheduleTable.length === 0 ?
-                        <>
+                        <div className="text">
                             {currentGroup ? notification : "Введите группу, фамилию преподавателя или номер аудитории"}
-                        </>
+                        </div>
                         :
                         <div className="schedule border sheduleText">
                             {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} />)}

@@ -1,29 +1,42 @@
-/* Стили для кнопки-гамбургера */
 .hamburger {
+    color: var(--text-color);
     display: flex;
-padding: 0;
-margin: 0;
+    padding: 0;
+    margin: 0;
     font-size: 30px;
     background: none;
     border: none;
     cursor: pointer;
 }
 
-/* Скрытое меню, которое появляется при открытии */
-
-/* Скрытое меню с начальной высотой 0 и переходом */
 .menu {
     display: flex;
     flex-direction: column;
 
-
     background-color: var(--background-color);
     padding: 10px;
     border-radius: 5px;
+    margin-right: 5px;
 
+    box-shadow: 3px 3px #000000;
+    top: 0;
+    left: 30px;
+    position: absolute;
+    transform: translateX(-150%);
+    animation: menu 0.2s forwards;
 }
 
-.menu div{
+@keyframes menu {
+    0% {
+        transform: translateX(-150%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.menu div {
     display: flex;
     align-items: center;
 }

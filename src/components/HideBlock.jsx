@@ -1,27 +1,23 @@
-import { useRef } from "react";
+import { useState } from "react";
 import "./HideBlock.css"
 
 const HideBlock = ({ children, title, hide = false }) => {
 
-    const childRef = useRef(null);
-    const titleRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(hide);
 
     const hideBlock = () => {
-        childRef.current.classList.toggle("disableBlock")
-        titleRef.current.classList.toggle("arrowRight")
-        titleRef.current.classList.toggle("arrowDown")
+        setIsOpen(!isOpen);
     }
 
     return (
         <>
             <div
-                ref={titleRef}
-                className={"pointer " + (hide ? "arrowRight" : "arrowDown")}
+                className={"pointer " + (isOpen ? "arrowRight" : "arrowDown")}
                 onClick={() => hideBlock()}>
                 {title}
             </div>
 
-            <div ref={childRef} className={hide ? "disableBlock" : ""}>
+            <div className={isOpen ? "disableBlock" : ""}>
                 {children}
             </div>
         </>

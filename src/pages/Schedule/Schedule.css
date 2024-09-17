@@ -30,6 +30,8 @@
 
 .scheduleContent {
     width: 85vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #groupInput {
@@ -156,7 +158,8 @@
 
 .groupBlock::-webkit-scrollbar {
     width: 12px;
-    color: var(--background-color);;
+    color: var(--background-color);
+    ;
     border-radius: 5px;
 }
 
@@ -207,4 +210,19 @@ input[type="color"] {
     width: 40px;
     height: 40px;
     background-color: transparent;
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
+}
+
+.resetButton {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.resetButton:active {
+    background-color: #4c4c4c;
 }
