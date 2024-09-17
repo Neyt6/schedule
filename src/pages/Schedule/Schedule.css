@@ -20,6 +20,10 @@
     .text {
         font-size: 15px !important;
     }
+
+    .content{
+        display: block;
+    }
 }
 
 :root {

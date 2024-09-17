@@ -12,7 +12,7 @@ const HideBlock = ({ children, title, hide = false }) => {
     return (
         <>
             <div
-                className={"pointer " + (isOpen ? "arrowRight" : "arrowDown")}
+                className={"text pointer " + (isOpen ? "arrowRight" : "arrowDown")}
                 onClick={() => hideBlock()}>
                 {title}
             </div>
