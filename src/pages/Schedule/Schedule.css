@@ -21,14 +21,15 @@
         font-size: 15px !important;
     }
 
-    .content{
+    .content {
         display: block;
     }
 }
 
 :root {
     --contrast-color: #58e870;
-    --background-color: #808080;
+    --main-color: #808080;
+    --background-color: #4b4b4b;
     --text-color: #f0f8ff;
 }
 
@@ -40,13 +41,13 @@
 
 #groupInput {
     box-shadow: 3px 3px #000000;
-    background-color: var(--background-color);
+    background-color: var(--main-color);
 
     width: 100%;
 }
 
 #groupInput::placeholder {
-    color: rgb(200, 200, 200);
+    color: #aaaaaa;
 }
 
 .inputBlock {
@@ -57,7 +58,7 @@
 
 .groupButton {
     box-shadow: 3px 3px #000000;
-    background-color: var(--background-color);
+    background-color: var(--main-color);
 
     margin-left: 5px;
 }
@@ -75,7 +76,9 @@
 
 .schedule {
     box-shadow: 3px 3px #000000;
-    background-color: var(--background-color);
+    background-color: var(--main-color);
+
+    margin-bottom: 2px;
 }
 
 .weeks {
@@ -83,7 +86,7 @@
     flex-wrap: wrap;
 
     margin-bottom: 7px;
-    background-color: var(--background-color);
+    background-color: var(--main-color);
     box-shadow: 3px 3px #000000;
 }
 
@@ -135,11 +138,10 @@
     display: flex;
     align-items: center;
 
-    width: 15%;
+    width: calc(94% / 6);
     padding: 5px;
 
     border-right: 2px dashed;
-
 }
 
 .cell:last-child {
@@ -162,19 +164,19 @@
 
 .groupBlock::-webkit-scrollbar {
     width: 12px;
-    color: var(--background-color);
+    color: var(--main-color);
     ;
     border-radius: 5px;
 }
 
 .groupBlock::-webkit-scrollbar-thumb {
-    background-color: var(--background-color);
+    background-color: var(--main-color);
     border-radius: 5px;
 }
 
 .group:hover {
     cursor: pointer;
-    background-color: var(--background-color);
+    background-color: var(--main-color);
     border-radius: 5px;
 }
 
@@ -197,7 +199,7 @@
     align-items: center;
     margin-bottom: 10px;
 
-    background-color: var(--background-color);
+    background-color: var(--main-color);
     box-shadow: 3px 3px #000000;
 }
 

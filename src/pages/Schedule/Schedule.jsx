@@ -23,14 +23,17 @@ const Schedule = () => {
 
     let [notification, setNotification] = useState("Loading...")
 
+    let [mainColor, setMainColor] = useState(localStorage.getItem('mainColor') || "#808080");
+    document.documentElement.style.setProperty('--main-color', mainColor);
+
     let [contrastColor, setContrastColor] = useState(localStorage.getItem('contrastColor') || "#58e870");
     document.documentElement.style.setProperty('--contrast-color', contrastColor);
 
-    let [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('backgroundColor') || "#808080");
-    document.documentElement.style.setProperty('--background-color', backgroundColor);
-
     let [textColor, setTextColor] = useState(localStorage.getItem('textColor') || "#f0f8ff");
     document.documentElement.style.setProperty('--text-color', textColor);
+
+    let [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('backgroundColor') || "#4b4b4b");
+    document.documentElement.style.setProperty('--background-color', backgroundColor);
 
     let [onVPK, setOnVPK] = useState((localStorage.getItem('onVPK') === "true") || false);
 
@@ -53,13 +56,13 @@ const Schedule = () => {
             })
             .catch(error => {
                 setScheduleTable([])
-                setNotification("Расписания для этой недели пока нет")
+                setNotification("Расписания для этой недели пока нет :(")
                 console.log(error)
             })
     }
 
     const getGroupList = (currentQuery) => {
-        if (currentQuery !== "") {
+        if (currentQuery) {
             axios.get("https://webictis.sfedu.ru/schedule-api/?query=" + currentQuery)
                 .then(res => {
                     if (res.data.result === "no_entries") {
@@ -149,19 +152,9 @@ const Schedule = () => {
         return tempScheduleTable
     }
 
-    const changeContrastColor = (color) => {
-        setContrastColor(color)
-        localStorage.setItem("contrastColor", color)
-    }
-
-    const changeBackgroundColor = (color) => {
-        setBackgroundColor(color)
-        localStorage.setItem("backgroundColor", color)
-    }
-
-    const changeTextColor = (color) => {
-        setTextColor(color)
-        localStorage.setItem("textColor", color)
+    const changeColor = (setFunk, colorName, color) => {
+        setFunk(color)
+        localStorage.setItem(colorName, color)
     }
 
     const changeOffVPK = (e) => {
@@ -229,28 +222,34 @@ const Schedule = () => {
                 <HamburgerMenu>
                     Настройки:
                     <div>
-                        <label htmlFor="contrastColor" className="text">Контрастный цвет </label>
-                        <input type="color" value={contrastColor} id="contrastColor" onChange={e => changeContrastColor(e.target.value)}></input>
-                        <button onClick={() => changeContrastColor("#58e870")} className="text resetButton">✖</button>
+                        <label htmlFor="mainColor" className="text">Основной цвет </label>
+                        <input type="color" value={mainColor} id="mainColor" onChange={e => changeColor(setMainColor, "mainColor", e.target.value)}></input>
+                        <button onClick={() => changeColor(setMainColor, "mainColor", "#808080")} className="text resetButton">✖</button>
                     </div>
 
                     <div>
-                        <label htmlFor="backgroundColor" className="text">Задний фон </label>
-                        <input type="color" value={backgroundColor} id="backgroundColor" onChange={e => changeBackgroundColor(e.target.value)}></input>
-                        <button onClick={() => changeBackgroundColor("#808080")} className="text resetButton">✖</button>
+                        <label htmlFor="contrastColor" className="text">Контрастный цвет </label>
+                        <input type="color" value={contrastColor} id="contrastColor" onChange={e => changeColor(setContrastColor, "contrastColor", e.target.value)}></input>
+                        <button onClick={() => changeColor(setContrastColor, "contrastColor", "#58e870")} className="text resetButton">✖</button>
                     </div>
 
                     <div>
                         <label htmlFor="textColor" className="text">Цвет текста </label>
-                        <input type="color" value={textColor} id="textColor" onChange={e => changeTextColor(e.target.value)}></input>
-                        <button onClick={() => changeTextColor("#f0f8ff")} className="text resetButton">✖</button>
+                        <input type="color" value={textColor} id="textColor" onChange={e => changeColor(setTextColor, "textColor", e.target.value)}></input>
+                        <button onClick={() => changeColor(setTextColor, "textColor", "#f0f8ff")} className="text resetButton">✖</button>
                     </div>
 
                     <div>
-                        <label htmlFor="unloadModelCheckBox" className="">Включить ВПК</label>
+                        <label htmlFor="backgroundColor" className="text">Задний фон </label>
+                        <input type="color" value={backgroundColor} id="backgroundColor" onChange={e => changeColor(setBackgroundColor, "backgroundColor", e.target.value)}></input>
+                        <button onClick={() => changeColor(setBackgroundColor, "backgroundColor", "#4b4b4b")} className="text resetButton">✖</button>
+                    </div>
+
+                    <div>
+                        <label htmlFor="VPKCheckBox" className="">Включить ВПК</label>
                         <input
                             type="checkbox"
-                            id="unloadModelCheckBox"
+                            id="VPKCheckBox"
                             checked={onVPK}
                             onChange={(e) => changeOffVPK(e)}
                         />
@@ -263,7 +262,7 @@ const Schedule = () => {
 
                         <button
                             className="groupButton border text"
-                            onClick={() => getGroupList(document.getElementById("groupInput").value)}>
+                            onClick={() => getGroupList(document.getElementById("groupInput").value || "")}>
                             Клик
                         </button>
                     </div>
