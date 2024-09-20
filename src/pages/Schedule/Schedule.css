@@ -47,7 +47,14 @@
 }
 
 #groupInput::placeholder {
-    color: #aaaaaa;
+    color: var(--text-color);
+}
+
+.colorChoise {
+    box-shadow: 3px 3px #000000;
+    background-color: var(--main-color);
+
+    width: 100%;
 }
 
 .inputBlock {
@@ -57,21 +64,32 @@
 }
 
 .groupButton {
+    display: flex;
+    align-items: center;
     box-shadow: 3px 3px #000000;
     background-color: var(--main-color);
 
     margin-left: 5px;
 }
 
+.groupButton img {
+    width: 20px;
+    color: #aaaaaa;
+    padding-right: 5px;
+}
+svg {
+    width: 20px;
+    color: #aaaaaa;
+}
+
+
 .groupButton:hover {
     cursor: pointer;
-    box-shadow: none;
-    background-color: #999999;
+    box-shadow: 2px 2px #000000;
 }
 
 .groupButton:active {
-    box-shadow: none;
-    border: none;
+    border: var(--main-color) solid 1px;
 }
 
 .schedule {

@@ -6,6 +6,8 @@ import ScheduleRow from "./ScheduleRow";
 import HideBlock from "../../components/HideBlock";
 import HamburgerMenu from "../../components/HamburgerMenu";
 
+import colorSchemes from "./colorSchemes";
+
 const Schedule = () => {
 
     let [currentWeek, setCurrentWeek] = useState(1);
@@ -23,16 +25,18 @@ const Schedule = () => {
 
     let [notification, setNotification] = useState("Loading...")
 
-    let [mainColor, setMainColor] = useState(localStorage.getItem('mainColor') || "#808080");
+    let [currentColorScheme, setCurrentColorScheme] = useState(localStorage.getItem('currentColorScheme') || colorSchemes[0].name)
+
+    let [mainColor, setMainColor] = useState(localStorage.getItem('mainColor') || colorSchemes[0].mainColor);
     document.documentElement.style.setProperty('--main-color', mainColor);
 
-    let [contrastColor, setContrastColor] = useState(localStorage.getItem('contrastColor') || "#58e870");
+    let [contrastColor, setContrastColor] = useState(localStorage.getItem('contrastColor') || colorSchemes[0].contrastColor);
     document.documentElement.style.setProperty('--contrast-color', contrastColor);
 
-    let [textColor, setTextColor] = useState(localStorage.getItem('textColor') || "#f0f8ff");
+    let [textColor, setTextColor] = useState(localStorage.getItem('textColor') || colorSchemes[0].textColor);
     document.documentElement.style.setProperty('--text-color', textColor);
 
-    let [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('backgroundColor') || "#4b4b4b");
+    let [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('backgroundColor') || colorSchemes[0].backgroundColor);
     document.documentElement.style.setProperty('--background-color', backgroundColor);
 
     let [onVPK, setOnVPK] = useState((localStorage.getItem('onVPK') === "true") || false);
@@ -62,7 +66,7 @@ const Schedule = () => {
     }
 
     const getGroupList = (currentQuery) => {
-        if (currentQuery) {
+        if (currentQuery !== "") {
             axios.get("https://webictis.sfedu.ru/schedule-api/?query=" + currentQuery)
                 .then(res => {
                     if (res.data.result === "no_entries") {
@@ -157,6 +161,16 @@ const Schedule = () => {
         localStorage.setItem(colorName, color)
     }
 
+    const changeCurrentColorScheme = (scheme) => {
+        localStorage.setItem("currentColorScheme", scheme)
+        scheme = colorSchemes.find(item => item.name === scheme)
+
+        changeColor(setMainColor, "mainColor", scheme.mainColor)
+        changeColor(setContrastColor, "contrastColor", scheme.contrastColor)
+        changeColor(setTextColor, "textColor", scheme.textColor)
+        changeColor(setBackgroundColor, "backgroundColor", scheme.backgroundColor)
+    }
+
     const changeOffVPK = (e) => {
         setOnVPK(e.target.checked)
         localStorage.setItem("onVPK", e.target.checked)
@@ -245,6 +259,16 @@ const Schedule = () => {
                         <button onClick={() => changeColor(setBackgroundColor, "backgroundColor", "#4b4b4b")} className="text resetButton">✖</button>
                     </div>
 
+                    <label htmlFor="selectColorScheme">Выбрать цветовую схему:</label>
+                    <select
+                        id="selectColorScheme"
+                        className="colorChoise border text"
+                        value={currentColorScheme}
+                        onChange={(e) => { setCurrentColorScheme(e.target.value); changeCurrentColorScheme(e.target.value) }}
+                    >
+                        {colorSchemes.map((item, ind) => <option key={ind} value={item.name}>{item.name}</option>)}
+                    </select>
+
                     <div>
                         <label htmlFor="VPKCheckBox" className="">Включить ВПК</label>
                         <input
@@ -262,7 +286,7 @@ const Schedule = () => {
 
                         <button
                             className="groupButton border text"
-                            onClick={() => getGroupList(document.getElementById("groupInput").value || "")}>
+                            onClick={() => getGroupList(document.getElementById("groupInput").value)}>
                             Клик
                         </button>
                     </div>
