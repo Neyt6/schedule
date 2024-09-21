@@ -238,25 +238,25 @@ const Schedule = () => {
                     <div>
                         <label htmlFor="mainColor" className="text">Основной цвет </label>
                         <input type="color" value={mainColor} id="mainColor" onChange={e => changeColor(setMainColor, "mainColor", e.target.value)}></input>
-                        <button onClick={() => changeColor(setMainColor, "mainColor", "#808080")} className="text resetButton">✖</button>
+                        <button onClick={() => changeColor(setMainColor, "mainColor", colorSchemes[0].mainColor)} className="text resetButton">✖</button>
                     </div>
 
                     <div>
                         <label htmlFor="contrastColor" className="text">Контрастный цвет </label>
                         <input type="color" value={contrastColor} id="contrastColor" onChange={e => changeColor(setContrastColor, "contrastColor", e.target.value)}></input>
-                        <button onClick={() => changeColor(setContrastColor, "contrastColor", "#58e870")} className="text resetButton">✖</button>
+                        <button onClick={() => changeColor(setContrastColor, "contrastColor", colorSchemes[0].contrastColor)} className="text resetButton">✖</button>
                     </div>
 
                     <div>
                         <label htmlFor="textColor" className="text">Цвет текста </label>
                         <input type="color" value={textColor} id="textColor" onChange={e => changeColor(setTextColor, "textColor", e.target.value)}></input>
-                        <button onClick={() => changeColor(setTextColor, "textColor", "#f0f8ff")} className="text resetButton">✖</button>
+                        <button onClick={() => changeColor(setTextColor, "textColor", colorSchemes[0].textColor)} className="text resetButton">✖</button>
                     </div>
 
                     <div>
                         <label htmlFor="backgroundColor" className="text">Задний фон </label>
                         <input type="color" value={backgroundColor} id="backgroundColor" onChange={e => changeColor(setBackgroundColor, "backgroundColor", e.target.value)}></input>
-                        <button onClick={() => changeColor(setBackgroundColor, "backgroundColor", "#4b4b4b")} className="text resetButton">✖</button>
+                        <button onClick={() => changeColor(setBackgroundColor, "backgroundColor", colorSchemes[0].backgroundColor)} className="text resetButton">✖</button>
                     </div>
 
                     <label htmlFor="selectColorScheme">Выбрать цветовую схему:</label>

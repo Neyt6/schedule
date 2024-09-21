@@ -1,7 +1,7 @@
 const colorSchemes = [{
     name: "Дефолтная",
     mainColor: "#808080",
-    contrastColor: "#58e870",
+    contrastColor: "#00ff2a",
     textColor: "#f0f8ff",
     backgroundColor: "#4b4b4b",
 },
@@ -32,6 +32,13 @@ const colorSchemes = [{
     contrastColor: "#0011ff",
     textColor: "#000000",
     backgroundColor: "#ffffff",
+},
+{
+    name: "Розовая",
+    mainColor: "#cf96c7",
+    contrastColor: "#ffea00",
+    textColor: "#f0f8ff",
+    backgroundColor: "#783f83",
 }]
 
 export default colorSchemes

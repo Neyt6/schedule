@@ -27,7 +27,7 @@
 }
 
 :root {
-    --contrast-color: #58e870;
+    --contrast-color: #00ff2a;
     --main-color: #808080;
     --background-color: #4b4b4b;
     --text-color: #f0f8ff;
@@ -47,7 +47,7 @@
 }
 
 #groupInput::placeholder {
-    color: var(--text-color);
+    color: rgb(from var(--text-color) r g b / .5);
 }
 
 .colorChoise {
@@ -77,11 +77,6 @@
     color: #aaaaaa;
     padding-right: 5px;
 }
-svg {
-    width: 20px;
-    color: #aaaaaa;
-}
-
 
 .groupButton:hover {
     cursor: pointer;
@@ -114,12 +109,12 @@ svg {
 
 .week:hover {
     cursor: pointer;
-    background-color: #555555;
+    background-color: rgb(from var(--contrast-color) r g b / .4);
     border-radius: 5px;
 }
 
 .weekActive {
-    background-color: #4c4c4c;
+    background-color: rgb(from var(--contrast-color) r g b / .4);
     border-radius: 5px;
 }
 
