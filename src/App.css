@@ -12,6 +12,10 @@ body {
   border-radius: 5px;
 }
 
+.shadow {
+  box-shadow: 3px 3px #000000;
+}
+
 .content {
   display: flex;
 }
@@ -23,7 +27,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #1e1e1e;
+  background-color: var(--transparent-main-color);
   border-radius: 5px;
 }
 

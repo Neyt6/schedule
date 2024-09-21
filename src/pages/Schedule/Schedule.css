@@ -31,6 +31,9 @@
     --main-color: #808080;
     --background-color: #4b4b4b;
     --text-color: #f0f8ff;
+    --transparent-text-color: rgb(from var(--text-color) r g b / .5);
+    --transparent-contrast-color: rgb(from var(--contrast-color) r g b / .4);
+    --transparent-main-color: rgb(from var(--main-color) r g b / .4);
 }
 
 .scheduleContent {
@@ -40,18 +43,16 @@
 }
 
 #groupInput {
-    box-shadow: 3px 3px #000000;
     background-color: var(--main-color);
 
     width: 100%;
 }
 
 #groupInput::placeholder {
-    color: rgb(from var(--text-color) r g b / .5);
+    color: var(--transparent-text-color);
 }
 
 .colorChoise {
-    box-shadow: 3px 3px #000000;
     background-color: var(--main-color);
 
     width: 100%;
@@ -66,21 +67,14 @@
 .groupButton {
     display: flex;
     align-items: center;
-    box-shadow: 3px 3px #000000;
     background-color: var(--main-color);
 
     margin-left: 5px;
 }
 
-.groupButton img {
-    width: 20px;
-    color: #aaaaaa;
-    padding-right: 5px;
-}
-
 .groupButton:hover {
+    background-color: var(--transparent-main-color);
     cursor: pointer;
-    box-shadow: 2px 2px #000000;
 }
 
 .groupButton:active {
@@ -88,7 +82,6 @@
 }
 
 .schedule {
-    box-shadow: 3px 3px #000000;
     background-color: var(--main-color);
 
     margin-bottom: 2px;
@@ -100,7 +93,6 @@
 
     margin-bottom: 7px;
     background-color: var(--main-color);
-    box-shadow: 3px 3px #000000;
 }
 
 .week {
@@ -109,12 +101,12 @@
 
 .week:hover {
     cursor: pointer;
-    background-color: rgb(from var(--contrast-color) r g b / .4);
+    background-color: var(--transparent-contrast-color);
     border-radius: 5px;
 }
 
 .weekActive {
-    background-color: rgb(from var(--contrast-color) r g b / .4);
+    background-color: var(--transparent-contrast-color);
     border-radius: 5px;
 }
 
@@ -178,7 +170,6 @@
 .groupBlock::-webkit-scrollbar {
     width: 12px;
     color: var(--main-color);
-    ;
     border-radius: 5px;
 }
 
@@ -189,7 +180,7 @@
 
 .group:hover {
     cursor: pointer;
-    background-color: var(--main-color);
+    background-color: var(--transparent-contrast-color);
     border-radius: 5px;
 }
 
@@ -213,7 +204,6 @@
     margin-bottom: 10px;
 
     background-color: var(--main-color);
-    box-shadow: 3px 3px #000000;
 }
 
 .vpk::after {
@@ -243,5 +233,6 @@ label {
 }
 
 .resetButton:active {
-    background-color: #4c4c4c;
+    background-color: var(--transparent-contrast-color);
+    border-radius: 5px;
 }

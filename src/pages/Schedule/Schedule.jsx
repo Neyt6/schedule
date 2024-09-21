@@ -76,7 +76,8 @@ const Schedule = () => {
                         showGroupSchedule(res.data.table.group)
                     }
                     else {
-                        setGroupList(res.data.choices)
+                        let l = res.data.choices.sort((a, b) => a.name.localeCompare(b.name));
+                        setGroupList(l)
                     }
                 })
         }
@@ -282,10 +283,10 @@ const Schedule = () => {
 
                 <div className="scheduleContent">
                     <div className="inputBlock">
-                        <input id="groupInput" className="border text" placeholder={currentGroupName + (currentVPKName ? " + " + currentVPKName : "")} onKeyDown={onKeyDown} />
+                        <input id="groupInput" className="border text shadow" placeholder={currentGroupName + (currentVPKName ? " + " + currentVPKName : "")} onKeyDown={onKeyDown} />
 
                         <button
-                            className="groupButton border text"
+                            className="groupButton border text shadow"
                             onClick={() => getGroupList(document.getElementById("groupInput").value)}>
                             Клик
                         </button>
@@ -302,7 +303,7 @@ const Schedule = () => {
                     }
 
                     {scheduleWeeks.length === 0 ? <> </> :
-                        <div className="weeks border">
+                        <div className="weeks border shadow">
                             {scheduleWeeks.map((week, ind) =>
                                 <div key={ind} className={"week" + (week === currentWeek ? " currentWeek weekActive" : "")} onClick={() => { getDataByWeek(week); addClassToWeek(week) }} >
                                     {week}
@@ -316,14 +317,14 @@ const Schedule = () => {
                             {currentGroup ? notification : "Введите группу, фамилию преподавателя или номер аудитории"}
                         </div>
                         :
-                        <div className="schedule border sheduleText">
+                        <div className="schedule border shadow sheduleText">
                             {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} />)}
                         </div>
                     }
 
                     {VPKList.length === 0 ? <> </> :
-                        <HideBlock title={"ВПК"} hide={true}>
-                            <div className="vpks border">
+                        <HideBlock title={"ВПК"} hide={false}>
+                            <div className="vpks border shadow">
                                 {VPKList.map((vpk, ind) =>
                                     <div key={ind} className={"week vpk" + (vpk.group === currentVPK ? " currentWeek" : "")} onClick={() => showVPKSchedule(vpk.group)} >
                                         {vpk.name.replace("ВПК", "")}

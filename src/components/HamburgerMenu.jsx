@@ -15,7 +15,7 @@ const HamburgerMenu = ({ children }) => {
                 {"☰"}
             </button>
             {isOpen && (
-                <div className="menu border">
+                <div className="menu border shadow">
                     {children}
                 </div>
             )}
