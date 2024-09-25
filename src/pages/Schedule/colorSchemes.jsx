@@ -39,6 +39,13 @@ const colorSchemes = [{
     contrastColor: "#ffea00",
     textColor: "#f0f8ff",
     backgroundColor: "#783f83",
-}]
+},
+{
+    name: "Матрица",
+    mainColor: "#000000",
+    contrastColor: "#00ff2a",
+    textColor: "#f0f8ff",
+    backgroundColor: "#000000",
+},]
 
 export default colorSchemes
