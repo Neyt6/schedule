@@ -1,0 +1,58 @@
+/* Общий контейнер переключателя */
+.switch {
+    --switch-width: 40px;
+    --switch-height: calc(var(--switch-width) / 1.8);
+
+    position: relative;
+    display: inline-block;
+    width: var(--switch-width);
+    height: var(--switch-height);
+
+    margin-left: 5px;
+}
+
+/* Скрытый чекбокс */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Слайдер переключателя */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    background-color: var(--transparent-text-color);
+    transition: 0.4s;
+    border-radius: var(--switch-height);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: calc(var(--switch-height) - 4px);
+    width: calc(var(--switch-height) - 4px);
+
+    left: 2px;
+    top: 2px;
+
+    background-color: white;
+    background-color: var(--text-color);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Когда чекбокс активен */
+input:checked+.slider {
+    background-color: #4CAF50;
+    background-color: var(--transparent-contrast-color);
+}
+
+input:checked+.slider:before {
+    transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+}

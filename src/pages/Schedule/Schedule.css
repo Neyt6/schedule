@@ -222,14 +222,6 @@ input[type="color"] {
     cursor: pointer;
 }
 
-
-input[type="checkbox"] {
-    accent-color: var(--contrast-color);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
 label {
     cursor: pointer;
 }
@@ -242,5 +234,5 @@ label {
 
 .resetButton:active {
     background-color: var(--transparent-contrast-color);
-    border-radius: 5px;
+    border-radius: 10px;
 }

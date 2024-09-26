@@ -7,6 +7,7 @@ import HideBlock from "../../components/HideBlock";
 import HamburgerMenu from "../../components/HamburgerMenu";
 
 import colorSchemes from "./colorSchemes";
+import Switch from "../../components/Switch";
 
 const Schedule = () => {
 
@@ -173,10 +174,10 @@ const Schedule = () => {
     }
 
     const changeOffVPK = (e) => {
-        setOnVPK(e.target.checked)
-        localStorage.setItem("onVPK", e.target.checked)
+        setOnVPK(e)
+        localStorage.setItem("onVPK", e)
 
-        if (!e.target.checked) {
+        if (!e) {
             setVPKList([])
             setCurrentVPK("")
             setCurrentVPKName("")
@@ -270,15 +271,8 @@ const Schedule = () => {
                         {colorSchemes.map((item, ind) => <option key={ind} value={item.name}>{item.name}</option>)}
                     </select>
 
-                    <div>
-                        <label htmlFor="VPKCheckBox" className="">Включить ВПК</label>
-                        <input
-                            type="checkbox"
-                            id="VPKCheckBox"
-                            checked={onVPK}
-                            onChange={(e) => changeOffVPK(e)}
-                        />
-                    </div>
+                    <Switch defaultValue={onVPK} title={"Включить ВПК"} onChangeValue={changeOffVPK} />
+
                 </HamburgerMenu>
 
                 <div className="scheduleContent">
