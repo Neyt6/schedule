@@ -41,6 +41,7 @@ const Schedule = () => {
     document.documentElement.style.setProperty('--background-color', backgroundColor);
 
     let [onVPK, setOnVPK] = useState((localStorage.getItem('onVPK') === "true") || false);
+    let [itsWeekend,] = useState(new Date().toDateString().includes("Sun"))
 
     const getDataByWeek = (week) => {
         let tempGroupTable = []
@@ -276,6 +277,8 @@ const Schedule = () => {
                 </HamburgerMenu>
 
                 <div className="scheduleContent">
+                    {itsWeekend && <div className="text">Сегодня выходной вообще-то, что ты тут забыл?</div>}
+
                     <div className="inputBlock">
                         <input id="groupInput" className="border text shadow" placeholder={currentGroupName + (currentVPKName ? " + " + currentVPKName : "")} onKeyDown={onKeyDown} />
 

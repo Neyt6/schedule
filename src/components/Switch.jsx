@@ -10,7 +10,7 @@ const Switch = ({ defaultValue, title, onChangeValue }) => {
     };
 
     return (
-        <div style={{ paddingTop: "5px" }}>
+        <div style={{ display: 'flex', alignItems: "center", paddingTop: "5px" }}>
             <label htmlFor={title}>{title}</label>
             <label className="switch">
                 <input id={title} type="checkbox" checked={isChecked} onChange={handleChange} />

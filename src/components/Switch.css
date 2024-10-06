@@ -28,7 +28,7 @@
     bottom: 0;
     background-color: #ccc;
     background-color: var(--transparent-text-color);
-    transition: 0.4s;
+    transition: 0.3s;
     border-radius: var(--switch-height);
 }
 
@@ -43,7 +43,7 @@
 
     background-color: white;
     background-color: var(--text-color);
-    transition: 0.4s;
+    transition: 0.3s;
     border-radius: 50%;
 }
 
