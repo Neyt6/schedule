@@ -49,6 +49,8 @@ const ScheduleRow = ({ row }) => {
         <div className={"row" + rowClass}>
             {row.map((cell, ind) =>
                 <div key={ind} className="cell">
+                    {/[А-Яа-я]-\d{3}/.test(cell) && <div className="offlineTitle">Очно📚</div>}
+                    {(cell.includes("LMS") || cell.includes("АКТРУ")) && <div className="onlineTitle">Онлайн💻</div>}
                     {addAktru(cell)}
                 </div>
             )}

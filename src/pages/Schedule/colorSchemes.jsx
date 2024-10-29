@@ -36,7 +36,7 @@ const colorSchemes = [{
 {
     name: "Розовая",
     mainColor: "#cf96c7",
-    contrastColor: "#ffea00",
+    contrastColor: "#0011ff",
     textColor: "#f0f8ff",
     backgroundColor: "#783f83",
 },

@@ -141,8 +141,7 @@
 
 .cell {
     display: flex;
-    align-items: center;
-
+    flex-direction: column;
     width: calc(94% / 6);
     padding: 5px;
 
@@ -235,4 +234,12 @@ label {
 .resetButton:active {
     background-color: var(--transparent-contrast-color);
     border-radius: 10px;
+}
+
+.offlineTitle {
+    color: var(--contrast-color);
+}
+
+.onlineTitle {
+    color: var(--contrast-color);
 }
