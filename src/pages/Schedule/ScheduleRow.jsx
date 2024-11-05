@@ -22,10 +22,7 @@ const itsToday = (dateString) => {
     const month = months[monthName];
     const currentDate = new Date();
 
-    if (Number(day) === currentDate.getDate() && month === currentDate.getMonth()) {
-        return true
-    }
-    return false
+    return Number(day) === currentDate.getDate() && month === currentDate.getMonth();
 }
 
 const addAktru = (cell) => {
@@ -38,9 +35,9 @@ const addAktru = (cell) => {
     return cell
 }
 
-const ScheduleRow = ({ row }) => {
+const ScheduleRow = ({ row, onOnline }) => {
 
-    var rowClass = ""
+    let rowClass = ""
     if (itsToday(row[0].substring(4))) {
         rowClass = " rowGlow"
     }
@@ -49,8 +46,12 @@ const ScheduleRow = ({ row }) => {
         <div className={"row" + rowClass}>
             {row.map((cell, ind) =>
                 <div key={ind} className="cell">
-                    {/[А-Яа-я]-\d{3}/.test(cell) && <div className="offlineTitle">Очно📚</div>}
-                    {(cell.includes("LMS") || cell.includes("АКТРУ")) && <div className="onlineTitle">Онлайн💻</div>}
+                    {onOnline &&
+                        <>
+                            {/[А-Яа-я]-\d{3}/.test(cell) && <div className="offlineTitle">Очно📚</div>}
+                            {(cell.includes("LMS") || cell.includes("АКТРУ")) && <div className="onlineTitle">Онлайн💻</div>}
+                        </>
+                    }
                     {addAktru(cell)}
                 </div>
             )}

@@ -41,6 +41,8 @@ const Schedule = () => {
     document.documentElement.style.setProperty('--background-color', backgroundColor);
 
     let [onVPK, setOnVPK] = useState((localStorage.getItem('onVPK') === "true") || false);
+    let [onOnlineTitle, setOnOnlineTitle] = useState((localStorage.getItem('onOnlineTitle') === "true") || false);
+
     let [itsWeekend,] = useState(new Date().toDateString().includes("Sun"))
 
     const getDataByWeek = (week) => {
@@ -186,6 +188,15 @@ const Schedule = () => {
         }
     }
 
+    const changeOnlineTitle = (e) => {
+        setOnOnlineTitle(e)
+        localStorage.setItem("onOnlineTitle", e)
+
+        if (!e) {
+            localStorage.removeItem("VPK")
+        }
+    }
+
     useEffect(() => {
 
         const addVPKToTable = (tempGroupTable, tempVPKTable) => {
@@ -273,6 +284,7 @@ const Schedule = () => {
                     </select>
 
                     <Switch defaultValue={onVPK} title={"Включить ВПК"} onChangeValue={changeOffVPK} />
+                    <Switch defaultValue={onOnlineTitle} title={"Отображать тип пары"} onChangeValue={changeOnlineTitle} />
 
                 </HamburgerMenu>
 
@@ -315,7 +327,7 @@ const Schedule = () => {
                         </div>
                         :
                         <div className="schedule border shadow sheduleText">
-                            {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} />)}
+                            {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} onOnline={onOnlineTitle}/>)}
                         </div>
                     }
 
