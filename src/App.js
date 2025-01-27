@@ -10,12 +10,10 @@ function App() {
   return (
     <Router>
       <PageTitle title="Расписание ИКТИБ" />
-
       <Routes>
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
     </Router>
   );
 }
-
 export default App;
