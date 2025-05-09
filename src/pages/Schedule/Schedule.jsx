@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, } from "react";
 
+
 import "./Schedule.css"
 import ScheduleRow from "./ScheduleRow";
 import HideBlock from "../../components/HideBlock";
@@ -9,7 +10,9 @@ import HamburgerMenu from "../../components/HamburgerMenu";
 import colorSchemes from "./colorSchemes";
 import Switch from "../../components/Switch";
 
+
 const Schedule = () => {
+    const API_BASE_URL = "https://shedule.rdcenter.ru/schedule-api";
 
     let [currentWeek, setCurrentWeek] = useState(1);
     let [scheduleTable, setScheduleTable] = useState([])
@@ -48,7 +51,7 @@ const Schedule = () => {
     const getDataByWeek = (week) => {
         let tempGroupTable = []
 
-        axios.get("https://shedule.rdcenter.ru/schedule-api/?group=" + currentGroup + "&week=" + week)
+        axios.get(`${API_BASE_URL}/?group=${currentGroup}&week=${week}`)
             .then(res => {
                 tempGroupTable = res.data.table.table
                 if (currentVPK) {
@@ -71,7 +74,7 @@ const Schedule = () => {
 
     const getGroupList = (currentQuery) => {
         if (currentQuery !== "") {
-            axios.get("https://shedule.rdcenter.ru/schedule-api/?query=" + currentQuery)
+            axios.get(`${API_BASE_URL}/?query=${currentQuery}`)
                 .then(res => {
                     if (res.data.result === "no_entries") {
                         setGroupList([{ name: "Нет результатов" }])
@@ -88,7 +91,7 @@ const Schedule = () => {
     }
 
     const getVPKList = () => {
-        axios.get("https://shedule.rdcenter.ru/schedule-api/?query=впк")
+        axios.get(`${API_BASE_URL}/?query=впк`)
             .then(res => {
                 let vpk = res.data.choices
                 vpk.sort((a, b) => {
@@ -219,7 +222,7 @@ const Schedule = () => {
         }
 
         if (currentGroup) {
-            axios.get("https:/shedule.rdcenter.ru/schedule-api/?group=" + currentGroup)
+            axios.get(`${API_BASE_URL}/?group=${currentGroup}`)
                 .then(res => {
                     let tempGroupTable = res.data.table.table
                     setScheduleWeeks(res.data.weeks)
@@ -227,7 +230,7 @@ const Schedule = () => {
                     setCurrentGroupName(res.data.table.name)
 
                     if (currentVPK) {
-                        axios.get("https:/shedule.rdcenter.ru/schedule-api/?group=" + currentVPK)
+                        axios.get(`${API_BASE_URL}/?group=${currentVPK}`)
                             .then(res => {
                                 let tempVPKTable = res.data.table.table
                                 setCurrentVPKName(res.data.table.name)
