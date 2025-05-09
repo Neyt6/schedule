@@ -11,7 +11,7 @@ function App() {
     <Router>
       <PageTitle title="Расписание ИКТИБ" />
       <Routes>
-        <Route path="/schedule" element={<Schedule />} />
+        <Route path="/scheduleictis" element={<Schedule />} />
       </Routes>
     </Router>
   );
