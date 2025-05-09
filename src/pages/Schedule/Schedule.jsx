@@ -48,11 +48,11 @@ const Schedule = () => {
     const getDataByWeek = (week) => {
         let tempGroupTable = []
 
-        axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup + "&week=" + week)
+        axios.get("https://shedule.rdcenter.ru/schedule-api/?group=" + currentGroup + "&week=" + week)
             .then(res => {
                 tempGroupTable = res.data.table.table
                 if (currentVPK) {
-                    axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentVPK + "&week=" + week)
+                    axios.get("https:/shedule.rdcenter.ru/schedule-api/?group=" + currentVPK + "&week=" + week)
                         .then(res => {
                             addVPKToTable(tempGroupTable, res.data.table.table)
                         })
@@ -71,7 +71,7 @@ const Schedule = () => {
 
     const getGroupList = (currentQuery) => {
         if (currentQuery !== "") {
-            axios.get("https://webictis.sfedu.ru/schedule-api/?query=" + currentQuery)
+            axios.get("https://shedule.rdcenter.ru/schedule-api/?query=" + currentQuery)
                 .then(res => {
                     if (res.data.result === "no_entries") {
                         setGroupList([{ name: "Нет результатов" }])
@@ -88,7 +88,7 @@ const Schedule = () => {
     }
 
     const getVPKList = () => {
-        axios.get("https://webictis.sfedu.ru/schedule-api/?query=впк")
+        axios.get("https://shedule.rdcenter.ru/schedule-api/?query=впк")
             .then(res => {
                 let vpk = res.data.choices
                 vpk.sort((a, b) => {
@@ -148,7 +148,7 @@ const Schedule = () => {
 
     const addVPKToTable = (tempGroupTable, tempVPKTable) => {
         let tempScheduleTable = []
-
+        
         tempGroupTable.forEach((element, ind) => {
             if (itsNoEmpty(tempVPKTable[ind])) {
                 tempScheduleTable.push(tempVPKTable[ind])
@@ -158,7 +158,7 @@ const Schedule = () => {
             }
         });
 
-        return tempScheduleTable
+        setScheduleTable( tempScheduleTable)
     }
 
     const changeColor = (setFunk, colorName, color) => {
@@ -219,7 +219,7 @@ const Schedule = () => {
         }
 
         if (currentGroup) {
-            axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentGroup)
+            axios.get("https:/shedule.rdcenter.ru/schedule-api/?group=" + currentGroup)
                 .then(res => {
                     let tempGroupTable = res.data.table.table
                     setScheduleWeeks(res.data.weeks)
@@ -227,7 +227,7 @@ const Schedule = () => {
                     setCurrentGroupName(res.data.table.name)
 
                     if (currentVPK) {
-                        axios.get("https://webictis.sfedu.ru/schedule-api/?group=" + currentVPK)
+                        axios.get("https:/shedule.rdcenter.ru/schedule-api/?group=" + currentVPK)
                             .then(res => {
                                 let tempVPKTable = res.data.table.table
                                 setCurrentVPKName(res.data.table.name)
