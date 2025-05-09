@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState, } from "react";
-
+import { useEffect, useState, } from "react";
 
 import "./Schedule.css"
 import ScheduleRow from "./ScheduleRow";
@@ -55,7 +54,7 @@ const Schedule = () => {
             .then(res => {
                 tempGroupTable = res.data.table.table
                 if (currentVPK) {
-                    axios.get("https:/shedule.rdcenter.ru/schedule-api/?group=" + currentVPK + "&week=" + week)
+                    axios.get(`${API_BASE_URL}/?group=${currentVPK}&week=${week}`)
                         .then(res => {
                             addVPKToTable(tempGroupTable, res.data.table.table)
                         })
@@ -151,7 +150,7 @@ const Schedule = () => {
 
     const addVPKToTable = (tempGroupTable, tempVPKTable) => {
         let tempScheduleTable = []
-        
+
         tempGroupTable.forEach((element, ind) => {
             if (itsNoEmpty(tempVPKTable[ind])) {
                 tempScheduleTable.push(tempVPKTable[ind])
@@ -161,7 +160,7 @@ const Schedule = () => {
             }
         });
 
-        setScheduleTable( tempScheduleTable)
+        setScheduleTable(tempScheduleTable)
     }
 
     const changeColor = (setFunk, colorName, color) => {
@@ -330,7 +329,7 @@ const Schedule = () => {
                         </div>
                         :
                         <div className="schedule border shadow sheduleText">
-                            {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} onOnline={onOnlineTitle}/>)}
+                            {scheduleTable.map((row, ind) => <ScheduleRow key={ind} row={row} onOnline={onOnlineTitle} />)}
                         </div>
                     }
 
